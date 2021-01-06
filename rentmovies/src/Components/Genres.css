@@ -1,0 +1,17 @@
+.genres__name {
+  text-align: center;
+  width: 99%;
+  font-weight: bold;
+  font-size: larger;
+}
+.genres__name:hover {
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+}
+.delete__genre {
+  float: right;
+}
+.listgroup__genre {
+  margin-top: 10px;
+}

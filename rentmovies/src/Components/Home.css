@@ -1,0 +1,16 @@
+.home {
+  width: 100%;
+  background-color: lightgray;
+  background-image: url("https://www.discoverboating.com/sites/default/files/inline-images/best-boat-movies.png");
+  position: fixed;
+}
+.home__left {
+  height: 700px;
+  margin-top: 10px;
+  overflow: auto;
+}
+.home__rigth {
+  height: 700px;
+  margin-top: 10px;
+  overflow: auto;
+}

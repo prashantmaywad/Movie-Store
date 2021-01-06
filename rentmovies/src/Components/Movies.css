@@ -1,0 +1,12 @@
+.movies {
+  margin: 10px;
+}
+.movie {
+  margin-top: 5px;
+}
+.cardImage {
+  height: 150px;
+  width: 100px !important;
+  clear: left;
+  float: right;
+}
