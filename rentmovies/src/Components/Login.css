@@ -1,0 +1,21 @@
+.login {
+  background-image: url("https://www.discoverboating.com/sites/default/files/inline-images/best-boat-movies.png");
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+.login__card {
+  width: 50%;
+  margin: auto;
+  margin-top: 120px;
+}
+.login__btn {
+  margin-bottom: 20px;
+  margin-right: 10px;
+  float: right;
+}
+.logincancel__btn {
+  margin-bottom: 20px;
+  margin-right: 10px;
+  float: right;
+}

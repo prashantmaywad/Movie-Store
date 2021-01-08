@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 
 function Movies() {
-  var Movies = useSelector((state) => state.Movies.Movies);
+  var Movies = useSelector((state) => state.Movies);
   return (
     <div className="movies">
       {Movies.map(({ name, description, image, genre, id }, index) => {

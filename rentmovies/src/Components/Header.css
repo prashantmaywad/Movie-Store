@@ -17,3 +17,8 @@
   float: right;
   margin-right: 10px;
 }
+.login__icon {
+  color: white;
+  margin-right: 10px;
+  margin-left: 10px;
+}

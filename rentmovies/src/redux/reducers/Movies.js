@@ -1,19 +1,26 @@
 import { CREATE_MOVIE, DELETE_MOVIE, LOAD_MOVIES } from "./../actionTypes";
-var initialState = {
-  Movies: [],
-};
-const movieReducer = (state = initialState, action) => {
+import createMovieInDB from "../../DB/Movie";
+var initialMovies = [];
+const movieReducer = (state = initialMovies, action) => {
   switch (action.type) {
     case CREATE_MOVIE: {
-      return { ...state, Movies: [...state.Movies].push(action.Movie) };
+      var index = state.find((element) => element.name === action.Movie.name);
+      var movie = state;
+      if (index === undefined) {
+        createMovieInDB(action.Movie);
+        movie = [...state, action.Movie];
+      }
+      return movie;
     }
     case LOAD_MOVIES: {
-      return { ...state, Movies: action.Movies };
+      return action.Movies;
     }
     case DELETE_MOVIE: {
       var movies = [...state.Movies];
-      var index = movies.findIndex((movie) => movie.name === action.Movie.name);
-      movies = movies.slice(index, 1);
+      var indexMovie = movies.findIndex(
+        (movie) => movie.name === action.Movie.name
+      );
+      movies = movies.slice(indexMovie, 1);
       return { ...state, Movies: movies };
     }
     default:

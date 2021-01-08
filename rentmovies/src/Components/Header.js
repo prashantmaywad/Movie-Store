@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./Header.css";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { CREATE_MOVIE } from "./../redux/actionTypes";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+
 import {
   Button,
   ModalHeader,
@@ -12,19 +15,38 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 function Header(props) {
+  var Genre = useSelector((state) => state.Genres);
+  var dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
+  const [genre, setGenre] = useState("");
+  const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+
   const [modal, setModal] = useState(false);
   const { className } = props;
   const toggle = () => setModal(!modal);
   const createMovie = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/api/movies/", { name: {} })
-      .then((res) => {})
-      .catch((ex) => {
-        console.log(ex);
+    if (name === "") setError("Name is Empty");
+    if (genre === "") setError("Genre is Empty");
+    if (image === "") setError("Image is Empty");
+    console.log(error);
+    if (error === "") {
+      toggle();
+      dispatch({
+        type: CREATE_MOVIE,
+        Movie: {
+          name,
+          image,
+          description,
+          genre,
+        },
       });
+    }
   };
 
   return (
@@ -39,26 +61,43 @@ function Header(props) {
                 type="text"
                 name="name"
                 id="name"
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Movie Name"
               />
             </FormGroup>
             <FormGroup>
               <Label for="exampleSelectMulti">Genres</Label>
-              <Input type="select" name="selectMulti" id="exampleSelectMulti">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+              <Input
+                type="select"
+                onChange={(e) => setGenre(e.target.value)}
+                name="selectMulti"
+                id="exampleSelectMulti"
+              >
+                <option></option>
+                {Genre &&
+                  Genre.length > 0 &&
+                  Genre.map((item, index) => {
+                    return <option>{item.name}</option>;
+                  })}
               </Input>
             </FormGroup>
             <FormGroup>
               <Label for="Image URL">Image URL</Label>
-              <Input type="text" name="text" placeholder="Image" />
+              <Input
+                type="text"
+                onChange={(e) => setImage(e.target.value)}
+                name="text"
+                placeholder="Image"
+              />
             </FormGroup>
             <FormGroup>
               <Label for="exampleText">Description</Label>
-              <Input type="textarea" name="text" id="exampleText" />
+              <Input
+                type="textarea"
+                onChange={(e) => setDescription(e.target.value)}
+                name="text"
+                id="exampleText"
+              />
             </FormGroup>
           </Form>
         </ModalBody>
@@ -80,6 +119,12 @@ function Header(props) {
       >
         Create Movie
       </Button>
+      <Link to="/login">
+        <AccountCircleIcon
+          fontSize="large"
+          className="login__icon"
+        ></AccountCircleIcon>
+      </Link>
     </div>
   );
 }
